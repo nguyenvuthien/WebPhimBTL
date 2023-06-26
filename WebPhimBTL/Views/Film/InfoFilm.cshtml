@@ -1,0 +1,505 @@
+﻿
+@{
+    ViewData["Title"] = "InfoFilm";
+    Layout = "~/Views/Shared/_LayoutCommon.cshtml";
+}
+@model WebPhimBTL.ViewModel.InfoFilm
+<link rel="stylesheet" href="~/assethome/css/style.css">
+<div class="confirm">
+        <h1>Thông báo</h1>
+        <p>
+            bạn có muốn  <em>xóa</em> không
+            <button id="cancel-delete">Cancel</button>
+            <button id="delete" autofocus>Xóa</button>
+    </div>
+<section class="section details">
+	<!-- details background -->
+	<div class="details__bg" data-bg="~/asset/img/home/home__bg.jpg"></div>
+	<!-- end details background -->
+	<!-- details content -->
+	<div class="container">
+		<div class="row">
+			<!-- title -->
+			<div class="col-12">
+				<h1 class="details__title">@Model.film.TenPhim</h1>
+			</div>
+			<!-- end title -->
+			<!-- content -->
+			<div class="col-10">
+				<div class="card card--details card--series">
+					<div class="row">
+						<!-- card cover -->
+						<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+							<div class="card__cover">
+								<img class="detail-title" value-id="@Model.film.MaPhim" src="../UploadAnh/Anh/@Model.film.Anh" alt="">
+							</div>
+						</div>
+						<!-- end card cover -->
+						<!-- card content -->
+						<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-9">
+							<div class="card__content">
+								<div class="card__wrap">
+									<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+
+									<ul class="card__list">
+										<li>HD</li>
+										<li>@Model.film.GioiHanDoTuoi +</li>
+									</ul>
+								</div>
+
+								<ul class="card__meta">
+									<li>
+										<span>Genre:</span> <a href="#">Action</a>
+										<a href="#">Triler</a>
+									</li>
+									<li><span>Release year:</span> @Model.film.NgayKhoiChieu.Value.Year</li>
+									<li><span>Country:</span> <a href="#">@Model.film.QuocGia</a> </li>
+								</ul>
+
+								<div class="card__description card__description--details">
+									@Model.film.MoTa
+								</div>
+							</div>
+						</div>
+						<!-- end card content -->
+					</div>
+				</div>
+			</div>
+			@{
+				string link = "";
+
+			}
+			@foreach(var item in Model.episodeList)
+			{
+				 link=item.Duonglink;
+				 
+			}
+			<!-- end content -->
+			<!-- player -->
+			<div class="col-12 col-xl-6">
+				<iframe width="560" height="315" src="@link" title="YouTube video player" 
+				frameborder="0" allow="accelerometer; autoplay; clipboard-write;encrypted-media;
+					gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				
+			</div>
+			<!-- end player -->
+			<!-- accordion -->
+			<div class="col-12 col-xl-6">
+				<div class="accordion" id="accordion">
+					<div class="accordion__card">
+						<div class="card-header" id="headingOne">
+							<button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								<span>Season: 1</span>
+								<span>@Model.film.NgayKhoiChieu</span>
+							</button>
+						</div>
+
+						<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+							<div class="card-body">
+								<table class="accordion__list">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Lượt xem</th>
+											<th>Air Date</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										@foreach(var item in Model.episodeList)
+										{
+											<tr onclick="loadFilmPlayer('@item.Duonglink')">
+												<th>@item.SoTapPhim</th>
+												<td>@item.LuotXem</td>
+											</tr>
+										}
+										
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					
+				</div>
+			</div>
+			<!-- end accordion -->
+
+			<div class="col-12">
+				<div class="details__wrap">
+					<!-- availables -->
+					<div class="details__devices">
+						<span class="details__devices-title">Available on devices:</span>
+						<ul class="details__devices-list">
+							<li><i class="icon ion-logo-apple"></i><span>IOS</span></li>
+							<li><i class="icon ion-logo-android"></i><span>Android</span></li>
+							<li><i class="icon ion-logo-windows"></i><span>Windows</span></li>
+							<li><i class="icon ion-md-tv"></i><span>Smart TV</span></li>
+						</ul>
+					</div>
+					<!-- end availables -->
+					<!-- share -->
+					<div class="details__share">
+						<span class="details__share-title">Share with friends:</span>
+
+						<ul class="details__share-list">
+							<li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
+							<li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
+							<li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
+							<li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
+						</ul>
+					</div>
+					<!-- end share -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end details content -->
+</section>
+<!-- end details -->
+<!-- content -->
+<section class="content">
+	<div class="content__head">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<!-- content title -->
+					<h2 class="content__title">Discover</h2>
+					<!-- end content title -->
+					<!-- content tabs nav -->
+					<ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Comments</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Chat nhanh</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Photos</a>
+						</li>
+					</ul>
+					<!-- end content tabs nav -->
+					<!-- content mobile tabs nav -->
+					<div class="content__mobile-tabs" id="content__mobile-tabs">
+						<div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<input type="button" value="Comments">
+							<span></span>
+						</div>
+
+						<div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Comments</a></li>
+
+								<li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Reviews</a></li>
+
+								<li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Photos</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- end content mobile tabs nav -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-8 col-xl-8">
+				<!-- content tabs -->
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+						<div class="row">
+							<!-- comments -->
+							<div class="col-12">
+								<div class="comments">
+									<ul class="comments__list">
+										
+									</ul>
+
+									<form action="#" class="form">
+										<textarea id-user="@ViewBag.ID" id="form-control-text" name="text" class="form__textarea" placeholder="Add comment"></textarea>
+										
+										@{
+											var url1 = "https://localhost:7050/api/v1/commentapi";
+										}
+										<div class="list-button">
+											<li id="send-cmt" onclick="send('@url1')"
+												class="form__btn comment-submit">
+												Send
+											</li>
+											<li id-edit=""
+												class="form__btn comment-edit">
+												Edit
+											</li>
+											<li id-edit=""
+												class="form__btn comment-cancel">
+												Cancel
+											</li>
+										</div>
+										
+									</form>
+								</div>
+							</div>
+							<!-- end comments -->
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+						<div class="row">
+							<!-- reviews -->
+							<label>Câu hỏi</label>
+							<textarea class="question" required="required"></textarea>
+							<input type="submit" value="gửi " class="chatGPTsend form__btn">
+							<textarea class="answer" rows="4" required="required"></textarea>
+							<!-- end reviews -->
+						</div>
+					</div>
+		</div>
+	</div>
+</section>
+<link href="~/css/stylesheet.css?v=3" rel="stylesheet" />
+
+<script src="~/tinymce/tinymce.min.js"></script>
+<script src="~/a/jquery.js"></script>
+<script src="~/css/test.js?v=2"></script>
+<style>
+	.list-button{
+		display:flex;
+		justify-content: space-around;
+	}
+	.label{
+		color: #fff;
+	}
+</style>
+<script>
+
+	function loadFilmPlayer(url){
+		$('iframe').attr('src',url)
+	}
+	let idDel
+	function LoadDataComment() {
+    str = '';
+    $.ajax({
+        type: 'GET',
+        url: 'https://localhost:7050/api/v1/commentapi?maphim=@Model.film.MaPhim',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, val) {
+
+                str += `<li class="comments__item">
+											<div class="comments__autor">
+													<img class="comments__avatar" src=${val.anh1} alt=""
+													`
+                if (val.maTaiKhoan == '@ViewBag.ID') {
+                    str += ` id-user=${val.maTaiKhoan}`
+                }
+                str += `>
+													<span class="comments__name">${val.tenTaiKhoan}</span>
+													<span class="comments__time">${val.thoiGianCmt}</span>
+											</div>
+												<p class="comments__text">${val.noiDung}</p>`
+
+                if (val.maTaiKhoan == '@ViewBag.ID') {
+                    str += `
+
+
+											<div class="comments__actions">
+
+
+													<button class="sub-cmt-edit" onclick="editCMT(${val.maComment},'${val.noiDung}')" type="button"><i class="icon ion-ios-share-alt"></i>edit</button>
+														<button class ="sub-cmt-delete" onclick="deleteCMT(${val.maComment})" type="button"><i class="icon ion-ios-quote"></i>remove</button>
+											</div>`
+                }
+                str += `						
+										</li>`
+
+
+              
+            })
+            $('.comments__list').html(str)
+        },
+        Error: function (ex) {
+            alter(ex.responseText)
+        }
+    })
+}
+
+	tinymce.init({
+		selector: '#form-control-text'
+	});
+
+	function send(getUrl) {
+    if (@ViewBag.ID==0){
+        alert('dang nhap de thuc hien chuc nang nay')
+        return ;
+    }
+    data1 = {}
+    data1['MaPhim'] = $('.detail-title').attr('value-id')
+    data1['MaTaiKhoan'] = $('.form__textarea').attr('id-user')
+    data1['NoiDung'] = $(tinymce.activeEditor.getContent()).text()
+    let date = new Date($.now()),
+        year = date.getFullYear().toString(),
+        month = (date.getMonth() + 1).toString().padStart(2, '0'),
+        day = date.getDate().toString().padStart(2, '0');
+    data1['ThoiGianCmt'] = `${year}-${month}-${day}T00:00:00`;
+    $.ajax({
+        type: 'POST',
+        url: getUrl,
+        headers: {
+        "Content-Type": "application/json"
+        },
+        crossDomain: true,
+        contentType: "application/json;charset=utf-8",
+        dataType: 'json',
+        data: JSON.stringify(data1),
+        success: function (data) {
+           LoadDataComment()
+		   tinymce.activeEditor.setContent('');
+
+        },
+        Error: function (ex) {
+            alter(ex.responseText)
+        }
+    })
+}
+	function deletecomment(urlDelete) {
+
+      $.ajax({
+          type: 'DELETE',
+          url: urlDelete ,
+          headers: {
+          "Content-Type": "application/json"
+          },
+          crossDomain: true,
+          contentType: "application/json;charset=utf-8",
+          dataType: 'json',
+
+          success: function (data) {
+				$('.confirm').hide()
+				LoadDataComment()
+
+          },
+          Error: function (ex) {
+              alter(ex.responseText)
+          }
+      })
+  }
+	$('.comment-edit').click(() => {
+		updateCMT()
+	})
+    $('.comment-cancel').click(()=>{
+         $('.comment-edit').hide()
+        $('.comment-submit').show()
+    })
+    $('.confirm').hide()
+    $('.comment-edit').hide()
+    $('.chatGPTsend').click(() => {
+
+        chatGPT()
+
+    })
+	function deleteCMT(id) {
+		idDel = id
+		$('.confirm').show()
+
+	}
+	$('#delete').click(() => {
+		let urlDelete = 'https://localhost:7050/api/v1/commentapi?maCmt=' + idDel
+
+		deletecomment(urlDelete)
+	})
+	$('#cancel-delete').click(() => {
+		$('.confirm').hide()
+	})
+
+  function editCMT(id,content) {
+		$('.comment-edit').show()
+		$('.comment-edit').attr('id-edit', id)
+		$('.comment-submit').hide()
+		$(tinymce.activeEditor.getContent()).attr("value-id-cmt", id)
+		tinymce.activeEditor.setContent(content);
+		$('html, body').animate({
+			scrollTop: $('#form-control-text').offset().top
+		}, 'slow');
+		$('#form-control-text').focus()
+  }
+  function updateCMT() {
+		let id = $('.comment-edit').attr('id-edit')
+      let urlPUT = 'https://localhost:7050/api/v1/commentapi'
+      data1 = {}
+		data1['MaComment'] = id
+		data1['MaPhim'] = $('.detail-title').attr('value-id')
+		data1['MaTaiKhoan'] = $('.form__textarea').attr('id-user')
+		data1['NoiDung'] = $(tinymce.activeEditor.getContent()).text()
+      let date = new Date($.now()),
+          year = date.getFullYear().toString(),
+          month = (date.getMonth() + 1).toString().padStart(2, '0'),
+          day = date.getDate().toString().padStart(2, '0');
+      data1['ThoiGianCmt'] = `${year}-${month}-${day}T00:00:00`;
+      $.ajax({
+          type: 'PUT',
+          url: urlPUT,
+          headers: {
+              "Content-Type": "application/json"
+          },
+          crossDomain: true,
+          contentType: "application/json;charset=utf-8",
+          dataType: 'json',
+          data: JSON.stringify(data1),
+          success: function (data) {
+              LoadDataComment()
+               $('.comment-edit').hide()
+                $('.comment-submit').show()
+				tinymce.activeEditor.setContent('');
+          },
+          Error: function (ex) {
+              alter(ex.responseText)
+          }
+      })
+  }
+	function chatGPT() {
+		urlGet = 'https://localhost:7050/api/ChatGPT_API?query=' + $('.question').val()
+		$.ajax({
+			type: 'GET',
+			url: urlGet,
+			dataType: 'json',
+			success: function (data) {
+				$('.answer').val(data['mota'])
+
+			},
+			Error: function (ex) {
+				alter(ex.responseText)
+			}
+		})
+	}
+	let time
+	function LoadView(){
+		urlGet = 'https://localhost:7050/api/ThoiGianXemAPI?maPhim=' + $('.detail-title').attr('value-id') 
+		+ '&&maUser=' +$('.form__textarea').attr('id-user')
+		$.ajax({
+			type: 'GET',
+			url: urlGet,
+			dataType: 'json',
+			success: function (data) {
+				if (data['thoiGianDaXem'] == 0) {
+					time= new Date();
+				}
+				else{
+					time = data['thoiGianDaXem']
+				}
+				$('.answer').val()
+
+			},
+			Error: function (ex) {
+				alter(ex.responseText)
+			}
+		})
+	} 
+LoadDataComment()
+	$('header').attr('name-user', '@ViewBag.Name')
+</script>
+
+

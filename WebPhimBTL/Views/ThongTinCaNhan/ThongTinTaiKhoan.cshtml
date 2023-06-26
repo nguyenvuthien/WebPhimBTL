@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewData["Title"] = "ThongTinTaiKhoan";
+    Layout = "~/Views/Shared/_LayoutCommon.cshtml";
+}
+<link rel="stylesheet" href="../Profile/css/plugins.css">
+<link rel="stylesheet" href="../Profile/css/style.css">
+@model WebPhimBTL.Models.TaiKhoan
+<div class="hero user-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1>Edward kennedy’s profile</h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="#">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span>Profile</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="user-information">
+					<div class="user-img">
+						<a href="#"><img src="../Profile/images/uploads/user-img.png" alt=""><br></a>
+						<a href="#" class="redbtn">Change avatar</a>
+					</div>
+					<div class="user-fav">
+						<p>Account Details</p>
+						<ul>
+							<li class="active"><a href="userprofile.html">Profile</a></li>
+							<li><a href="userfavoritelist.html">Favorite movies</a></li>
+							<li><a href="userrate.html">Rated movies</a></li>
+						</ul>
+					</div>
+					<div class="user-fav">
+						<p>Others</p>
+						<ul>
+							<li><a href="#">Change password</a></li>
+							<li><a href="#">Log out</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="form-style-1 user-pro" action="#">
+					<form action="#" class="user">
+						<h4>01. Profile </h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>@Html.DisplayNameFor(model => model.TenTaiKhoan)</label>
+								<input type="text" placeholder="@Html.DisplayFor(model => model.TenTaiKhoan)">
+							</div>
+
+						</div>
+						
+
+
+						<div class="row">
+							<div class="col-md-2">
+								<a asp-action="SuaThongTin"  style="font-family: 'Dosis', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #dd003f;
+    width: 100%; border-radius:30%; padding:12px; ">Edit</a>
+
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<script src="../Profile/js/jquery.js"></script>
+	<script src="../Profile/js/plugins.js"></script>
+	<script src="../Profile/js/plugins2.js"></script>
+	<script src="../Profile/js/custom.js"></script>
+<script>
+	$('header').attr('name-user', '@ViewBag.Ten')
+</script>
+	</html>

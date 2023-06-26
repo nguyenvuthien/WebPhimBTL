@@ -1,0 +1,65 @@
+﻿
+@using WebPhimBTL.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TPhim>
+@{
+    ViewData["Title"] = "DanhSachPhim";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>DanhSachPhim</h3>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<p>
+    <a asp-action="ThemPhimMoi">Create New</a>
+</p>
+<p>@TempData["Message"]</p>
+<table class="table">
+    <thead>
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(model => model[1].TenPhim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[2].Anh )
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model[4].NgayKhoiChieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[5].QuocGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[6].GioiHanDoTuoi)
+            </th>
+            <th class="option-menu"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @await Html.PartialAsync("PartialPhim")
+    </tbody>
+</table>
+<style>
+    .option-menu{
+        width : 220px;
+    }
+    table {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    td {
+        border: 1px solid black;
+        white-space: normal;
+    }
+
+    th {
+        border: 1px solid black;
+    }
+</style>
+@Html.PagedListPager(Model,page=>Url.Action("DanhSachPhim",new {page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<String> {"page-item"},
+    PageClasses = new List<String> {"page-link"}
+})

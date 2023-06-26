@@ -1,0 +1,28 @@
+﻿@using WebPhimBTL.ViewModel;
+@model FilmHome
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@foreach (var item in Model.phimmoi)
+{
+	<!-- card -->
+	<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+		<div class="card" >
+			<div class="card__cover">
+				<img src="../UploadAnh/Anh/@item.Anh" alt="">
+				<a href="../Film/InfoFilm?filmCode=@item.MaPhim" class="card__play">
+					<i class="icon ion-ios-play"></i>
+				</a>
+			</div>
+			<div class="card__content">
+				<h3 class="card__title"><a href="../Film/InfoFilm?filmCode=@item.MaPhim">@item.TenPhim</a></h3>
+				<span class="card__category">
+					<a href="../Film/InfoFilm?filmCode=@item.MaPhim">Action</a>
+					<a href="../Film/InfoFilm?filmCode=@item.MaPhim">Triler</a>
+				</span>
+				<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+			</div>
+		</div>
+	</div>
+	<!-- end card -->
+}
+
+

@@ -1,0 +1,55 @@
+﻿@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<WebPhimBTL.Models.Episode>
+@{
+    ViewData["Title"] = "DanhSachTapPhim";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1>DanhSachTapPhim : @ViewBag.TenPhim</h1>
+
+<p>
+    <a asp-action="ThemTapPhimMoi" asp-route-maphim="@ViewBag.MaPhim">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                Số tập phim
+            </th>
+            <th>
+                Đường link
+            </th>
+            <th>
+                Lượt xem
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTapPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duonglink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotXem)
+            </td>
+            
+            <td>
+                    <a asp-action="SuaTapPhim" asp-route-maTapPhim="@item.MaTapPhim">Edit</a> |
+                    <a asp-action="XoaTapPhim" asp-route-maTapPhim="@item.MaTapPhim">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="product__pagination">
+    @Html.PagedListPager(Model, page => Url.Action("DanhSachTapPhim", new{page=page}))
+</div>

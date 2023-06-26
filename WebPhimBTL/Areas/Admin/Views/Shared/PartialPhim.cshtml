@@ -1,0 +1,58 @@
+﻿@using WebPhimBTL.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TPhim>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var datetime = DateTime.Now.ToString();
+    int i = 0;
+    string @cls = "table-success";
+}
+@foreach (var item in Model)
+{
+    i = i + 1;
+
+    if (i % 2 == 0)
+    {
+        cls = "table-primary";
+    }
+    else
+    {
+        cls = "table-success";
+    }
+    <tr class="@cls"@* onload="disableBrowserCache()"*@>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenPhim)
+        </td>
+        <td>
+            <img style="width:50px;height:50px" src="~/UploadAnh/Anh/@item.Anh?v=@datetime" alt="">
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayKhoiChieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuocGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiHanDoTuoi)
+        </td>
+        <td>
+            <a asp-action="SuaPhim" asp-route-maPhim="@item.MaPhim">Edit</a> |
+            <a asp-action="DanhSachTapPhim" asp-route-maphim="@item.MaPhim">Details</a> |
+            <a asp-action="XoaPhim" asp-route-maPhim="@item.MaPhim">Delete</a>
+            <a asp-action="MenuCacPhim" asp-route-maPhim="@item.MaPhim">Comment</a>
+            
+        </td>
+    </tr>
+}
+@*<script>
+    function disableBrowserCache() {
+        // Sử dụng các thẻ Cache-Control, Pragma và Expires để vô hiệu hóa bộ nhớ đệm của trình duyệt
+        // Thời gian sống của tệp tin được đặt là 0 giây
+        // Các tệp tin sẽ không được lưu vào bộ nhớ đệm của trình duyệt
+        // Các tệp tin sẽ được tải lại từ máy chủ mỗi khi được yêu cầu
+        header('Cache-Control: no-cache, no-store, must-revalidate'); // HTTP 1.1.
+        header('Pragma: no-cache'); // HTTP 1.0.
+        header('Expires: 0'); // Proxies.
+    }
+</script>*@
